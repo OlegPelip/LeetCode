@@ -1,0 +1,30 @@
+class Solution {
+public:
+    vector<int> relativeSortArray(vector<int>& arr1, vector<int>& arr2) {
+        vector<int> result;
+        int count[1001] = {0};
+
+        // считаем все числа из arr1
+        for (int x : arr1) {
+            count[x]++;
+        }
+
+        // сначала добавляем по порядку arr2
+        for (int x : arr2) {
+            while (count[x] > 0) {
+                result.push_back(x);
+                count[x]--;
+            }
+        }
+
+        // потом добавляем оставшиеся числа (по возрастанию)
+        for (int i = 0; i <= 1000; i++) {
+            while (count[i] > 0) {
+                result.push_back(i);
+                count[i]--;
+            }
+        }
+
+        return result;
+    }
+};
